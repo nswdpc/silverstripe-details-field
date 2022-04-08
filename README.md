@@ -58,9 +58,9 @@ See tests/DetailsFieldTest for more.
     <summary><strong>Provide some optional information</strong>
     <p class="description">A field description</p>
     </summary>
-    <div><label><strong>Salutation</strong> <input type="text" name="Salutation"></label></div>
-    <div><label><strong>First name</strong> <input type="text" name="FirstName"></label></div>
-    <div><label><strong>Surname</strong> <input type="text" name="Surname"></label></div>
+    <div><label><strong>Salutation</strong> [___________]</label></div>
+    <div><label><strong>First name</strong> [___________]</label></div>
+    <div><label><strong>Surname</strong>    [___________]</label></div>
 </details>
 
 ## Extras
