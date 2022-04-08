@@ -1,0 +1,8 @@
+---
+Name: nswdpc-details-field
+---
+NSWDPC\Forms\DetailsField\DetailsField:
+  # set to false to NOT add strong tags around string summaries
+  auto_strong: true
+  # automatically trigger open if a child field has a validation message
+  open_when_child_message: true
