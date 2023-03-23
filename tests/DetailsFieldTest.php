@@ -166,6 +166,7 @@ class DetailsFieldTest extends SapphireTest
         $this->assertEquals( 3, $extras->count(), "All extras present");
 
         $expected = ["DESCRIPTION","RIGHT_TITLE","MESSAGE"];
+        $found = [];
         foreach($extras as $extra) {
             $found[] = trim($extra->textContent);
         }

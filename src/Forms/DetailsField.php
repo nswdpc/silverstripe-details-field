@@ -2,7 +2,7 @@
 
 namespace NSWDPC\Forms\DetailsField;
 
-use Silverstripe\Forms\CompositeField;
+use SilverStripe\Forms\CompositeField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLVarchar;
 use SilverStripe\ORM\ValidationResult;
@@ -30,6 +30,7 @@ class DetailsField extends CompositeField
      * Automatically add <strong> semantics around
      * string summary text
      * @var bool
+     * @config
      */
     private static $auto_strong = true;
 
@@ -41,7 +42,7 @@ class DetailsField extends CompositeField
     /**
      * Set summary content for the field, shown in a <summary> tag
      * Permitted content: Phrasing content or one element of Heading content
-     * @param string|DBHTMLVarchar
+     * @param string|DBHTMLVarchar $summary
      * @return self
      */
     public function setSummary($summary) : self
@@ -67,12 +68,12 @@ class DetailsField extends CompositeField
      */
     public function Summary()
     {
-        return $this->summary;
+        return $this->title;
     }
 
     /**
      * The title is the summary, this is implemented for consistency
-     * @param string|DBHTMLVarchar
+     * @param string|DBHTMLVarchar $title
      * @return self
      */
     public function setTitle($title)
@@ -97,7 +98,7 @@ class DetailsField extends CompositeField
 
     /**
      * Set the open state of the <details> element, it can be open or not
-     * @param bool
+     * @param bool $is
      * @return self
      */
     public function setIsOpen(bool $is) : self
