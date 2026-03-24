@@ -29,10 +29,9 @@ class DetailsField extends CompositeField
     /**
      * Automatically add <strong> semantics around
      * string summary text
-     * @var bool
      * @config
      */
-    private static $auto_strong = true;
+    private static bool $auto_strong = true;
 
     /**
      * @var bool
@@ -43,21 +42,23 @@ class DetailsField extends CompositeField
      * Set summary content for the field, shown in a <summary> tag
      * Permitted content: Phrasing content or one element of Heading content
      * @param string|DBHTMLVarchar $summary
-     * @return self
      */
     public function setSummary($summary) : self
     {
         if (!($summary instanceof DBHTMLVarchar)) {
-            $openTag = $closeTag = "";
+            $openTag = "";
+            $closeTag = "";
             if ($this->config()->get('auto_strong')) {
                 $openTag = "<strong>";
                 $closeTag = "</strong>";
             }
+
             $summary = DBField::create_field(
                 DBHTMLVarchar::class,
                 $openTag . htmlspecialchars($summary) . $closeTag
             );
         }
+
         $this->title = $summary;
         return $this;
     }
@@ -76,6 +77,7 @@ class DetailsField extends CompositeField
      * @param string|DBHTMLVarchar $title
      * @return self
      */
+    #[\Override]
     public function setTitle($title)
     {
         return $this->setSummary($title);
@@ -85,6 +87,7 @@ class DetailsField extends CompositeField
      * Whenever the field has a message, the field is open by default
      * @inheritdoc
      */
+    #[\Override]
     public function setMessage(
         $message,
         $messageType = ValidationResult::TYPE_ERROR,
@@ -93,13 +96,12 @@ class DetailsField extends CompositeField
         if($message !== "") {
             $this->setIsOpen(true);
         }
+
         return parent::setMessage($message, $messageType, $messageCast);
     }
 
     /**
      * Set the open state of the <details> element, it can be open or not
-     * @param bool $is
-     * @return self
      */
     public function setIsOpen(bool $is) : self
     {
@@ -111,7 +113,6 @@ class DetailsField extends CompositeField
      * Return the open state of the <details> element, it can be open or not
      * If a child field has a field message, then this field is triggered open by default
      * Provided open_when_child_message=true (the default)
-     * @return bool
      */
     public function IsOpen() : bool
     {
@@ -124,6 +125,7 @@ class DetailsField extends CompositeField
                 }
             }
         }
+
         return $this->isOpen;
     }
 }
