@@ -4,7 +4,6 @@ namespace NSWDPC\Forms\DetailsField\Tests;
 
 use NSWDPC\Forms\DetailsField\DetailsField;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBField;
@@ -136,7 +135,8 @@ class DetailsFieldTest extends SapphireTest
         $this->assertEquals($childFields->count(), $inputs->count(), "Correct number of inputs");
     }
 
-    public function testExtras(): void {
+    public function testExtras(): void
+    {
 
         $childFields = FieldList::create(
             TextField::create('Salutation', _t('myapp.SALUTATION', 'Salutation')),
@@ -163,18 +163,19 @@ class DetailsFieldTest extends SapphireTest
         $summary = $details->getElementsByTagName('summary')[0]; // DOMNode
         $extras = $summary->getElementsByTagName('p');
 
-        $this->assertEquals( 3, $extras->count(), "All extras present");
+        $this->assertEquals(3, $extras->count(), "All extras present");
 
         $expected = ["DESCRIPTION","RIGHT_TITLE","MESSAGE"];
         $found = [];
-        foreach($extras as $extra) {
+        foreach ($extras as $extra) {
             $found[] = trim((string) $extra->textContent);
         }
 
         $this->assertEmpty(array_diff($expected, $found), "All extras found");
     }
 
-    public function testChildMessage(): void {
+    public function testChildMessage(): void
+    {
 
         $childFields = FieldList::create(
             TextField::create('Salutation', _t('myapp.SALUTATION', 'Salutation')),

@@ -25,7 +25,6 @@ use SilverStripe\ORM\ValidationResult;
  */
 class DetailsField extends CompositeField
 {
-
     /**
      * Automatically add <strong> semantics around
      * string summary text
@@ -43,7 +42,7 @@ class DetailsField extends CompositeField
      * Permitted content: Phrasing content or one element of Heading content
      * @param string|DBHTMLVarchar $summary
      */
-    public function setSummary($summary) : self
+    public function setSummary($summary): self
     {
         if (!($summary instanceof DBHTMLVarchar)) {
             $openTag = "";
@@ -93,7 +92,7 @@ class DetailsField extends CompositeField
         $messageType = ValidationResult::TYPE_ERROR,
         $messageCast = ValidationResult::CAST_TEXT
     ) {
-        if($message !== "") {
+        if ($message !== "") {
             $this->setIsOpen(true);
         }
 
@@ -103,7 +102,7 @@ class DetailsField extends CompositeField
     /**
      * Set the open state of the <details> element, it can be open or not
      */
-    public function setIsOpen(bool $is) : self
+    public function setIsOpen(bool $is): self
     {
         $this->isOpen = $is;
         return $this;
@@ -114,12 +113,12 @@ class DetailsField extends CompositeField
      * If a child field has a field message, then this field is triggered open by default
      * Provided open_when_child_message=true (the default)
      */
-    public function IsOpen() : bool
+    public function IsOpen(): bool
     {
-        if($this->config()->get('open_when_child_message')) {
+        if ($this->config()->get('open_when_child_message')) {
             $childFields = $this->FieldList();
-            foreach($childFields as $field) {
-                if($field->getMessage() !== "") {
+            foreach ($childFields as $field) {
+                if ($field->getMessage() !== "") {
                     $this->setIsOpen(true);
                     break;
                 }
