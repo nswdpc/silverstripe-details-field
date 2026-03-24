@@ -4,7 +4,6 @@ namespace NSWDPC\Forms\DetailsField\Tests;
 
 use NSWDPC\Forms\DetailsField\DetailsField;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\FieldType\DBField;
@@ -23,7 +22,7 @@ class DetailsFieldTest extends SapphireTest
      */
     protected $usesDatabase = false;
 
-    public function testIsOpen()
+    public function testIsOpen(): void
     {
         $detailsField = DetailsField::create();
         $detailsField->setName("testIsOpen");
@@ -41,7 +40,7 @@ class DetailsFieldTest extends SapphireTest
         $this->assertTrue($details->hasAttribute('open'), "<details> has open attribute");
     }
 
-    public function testIsNotOpen()
+    public function testIsNotOpen(): void
     {
         $detailsField = DetailsField::create();
         $detailsField->setName("testIsNotOpen");
@@ -59,7 +58,7 @@ class DetailsFieldTest extends SapphireTest
         $this->assertFalse($details->hasAttribute('open'), "<details> has no open attribute");
     }
 
-    public function testSummary()
+    public function testSummary(): void
     {
         DetailsField::config()->set('auto_strong', true);
 
@@ -80,7 +79,7 @@ class DetailsFieldTest extends SapphireTest
         $this->assertEquals($summaryText, $strong->textContent, "Has <strong> around summary text");
     }
 
-    public function testSummaryHTML()
+    public function testSummaryHTML(): void
     {
         DetailsField::config()->set('auto_strong', true);
 
@@ -104,12 +103,12 @@ class DetailsFieldTest extends SapphireTest
         $summary = $doc->getElementsByTagName('summary')[0];
         $heading = $summary->getElementsByTagName('h4')[0];
 
-        $this->assertEquals($summaryText, trim($heading->textContent), "Has <h4> around summary text");
+        $this->assertEquals($summaryText, trim((string) $heading->textContent), "Has <h4> around summary text");
     }
 
 
 
-    public function testChildFields()
+    public function testChildFields(): void
     {
         $childFields = FieldList::create(
             TextField::create('Salutation', _t('myapp.SALUTATION', 'Salutation')),
@@ -130,13 +129,14 @@ class DetailsFieldTest extends SapphireTest
         $details = $doc->getElementsByTagName('details')[0]; // DOMNode
         $inputs = $details->getElementsByTagName('input');// DOMNodeList
         $summary = $details->getElementsByTagName('summary')[0]; // DOMNode
-        $this->assertEquals('CHILD_FIELDS', trim($summary->textContent));
+        $this->assertEquals('CHILD_FIELDS', trim((string) $summary->textContent));
         $fieldlist = $detailsField->FieldList();
         $this->assertEquals($childFields->count(), $fieldlist->count(), "Matching field count");
         $this->assertEquals($childFields->count(), $inputs->count(), "Correct number of inputs");
     }
 
-    public function testExtras() {
+    public function testExtras(): void
+    {
 
         $childFields = FieldList::create(
             TextField::create('Salutation', _t('myapp.SALUTATION', 'Salutation')),
@@ -163,18 +163,19 @@ class DetailsFieldTest extends SapphireTest
         $summary = $details->getElementsByTagName('summary')[0]; // DOMNode
         $extras = $summary->getElementsByTagName('p');
 
-        $this->assertEquals( 3, $extras->count(), "All extras present");
+        $this->assertEquals(3, $extras->count(), "All extras present");
 
         $expected = ["DESCRIPTION","RIGHT_TITLE","MESSAGE"];
         $found = [];
-        foreach($extras as $extra) {
-            $found[] = trim($extra->textContent);
+        foreach ($extras as $extra) {
+            $found[] = trim((string) $extra->textContent);
         }
 
         $this->assertEmpty(array_diff($expected, $found), "All extras found");
     }
 
-    public function testChildMessage() {
+    public function testChildMessage(): void
+    {
 
         $childFields = FieldList::create(
             TextField::create('Salutation', _t('myapp.SALUTATION', 'Salutation')),
