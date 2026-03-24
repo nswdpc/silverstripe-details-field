@@ -83,7 +83,7 @@ composer require nswdpc/silverstripe-details-field
 
 ## Maintainers
 
-+ [dpcdigital@NSWDPC:~$](https://dpc.nsw.gov.au)
++ PD Web Team
 
 ## Bugtracker
 
