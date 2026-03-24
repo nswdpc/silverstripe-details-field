@@ -5,7 +5,7 @@ namespace NSWDPC\Forms\DetailsField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLVarchar;
-use SilverStripe\ORM\ValidationResult;
+use SilverStripe\Core\Validation\ValidationResult;
 
 /**
  * DetailsField
